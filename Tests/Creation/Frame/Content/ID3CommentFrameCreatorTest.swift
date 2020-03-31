@@ -32,7 +32,7 @@ class ID3CommentFrameCreatorTest: XCTestCase {
             version: .version3,
             frames: [.Comment : ID3FrameCommentTypes(language: .und, description: "test", content: "::some sample content text::")]
         )
-        let id3UnsyncedLyricsFrameCreator = ID3CommentFrameCreator(
+        let id3CommentFrameCreator = ID3CommentFrameCreator(
             frameCreator: MockCommentTypesFrameContentCreator(
                 fakeNewFrameAsByte: newFrameBytes,
                 frameTypeToBeChecked: .Comment
@@ -40,7 +40,7 @@ class ID3CommentFrameCreatorTest: XCTestCase {
             id3FrameConfiguration: ID3FrameConfiguration()
         )
         
-        let newTagBytes = id3UnsyncedLyricsFrameCreator.createFrames(id3Tag: id3Tag, tag: tagAsBytes)
+        let newTagBytes = id3CommentFrameCreator.createFrames(id3Tag: id3Tag, tag: tagAsBytes)
         
         XCTAssertEqual(newTagBytes, tagAsBytes + newFrameBytes)
     }
