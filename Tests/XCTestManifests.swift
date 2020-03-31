@@ -350,7 +350,7 @@ extension ID3FileTypeFrameCreatorTest {
     ]
 }
 
-extension ID3iTunesGroupingFrameCreatorTest {
+extension ID3ITunesGroupingFrameCreatorTest {
     static let __allTests = [
         ("testFrameCreationWhenThereIsAGrouping", testFrameCreationWhenThereIsAGrouping),
         ("testNoFrameCreationWhenThereIsNoGrouping", testNoFrameCreationWhenThereIsNoGrouping),

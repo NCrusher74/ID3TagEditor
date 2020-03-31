@@ -11,8 +11,11 @@ import XCTest
 class ID3FrameFromURLStringContentCreatorTest: XCTestCase {
     func testCreatorFrameFromURLStringContent() {
         let id3FrameFromURLStringContentCreator = ID3FrameFromURLStringContentCreator(
-                frameContentSizeCalculator: MockFrameContentSizeCalculator(),
-                frameFlagsCreator: MockFrameFlagsCreator()
+            frameContentSizeCalculator: ID3FrameContentSizeCalculator(
+                uInt32ToByteArrayAdapter: UInt32ToByteArrayAdapterUsingUnsafePointer(),
+                synchsafeEncoder: SynchsafeIntegerEncoder()
+            ),
+            frameFlagsCreator: ID3FrameFlagsCreator()
         )
 
         let frameBytes = id3FrameFromURLStringContentCreator.createFrame(
@@ -23,9 +26,11 @@ class ID3FrameFromURLStringContentCreatorTest: XCTestCase {
 
         XCTAssertEqual(frameBytes, [
             0x22,//identifier
-            0x11, // size? How do I get this?
-            0x00, 0x01, // version?
-            0x00, 0x00, 0x68, 0x74, 0x74, 0x70, 0x3a, 0x2f, 0x2f, 0x74, 0x65, 0x73, 0x74, 0x75, 0x72, 0x6c, 0x2e, 0x63, 0x6f, 0x6d, 0x00, 0x00 // http://testurl.com
+            0x00, 0x00, 0x00, 0x12, // size
+            0x00, 0x00, // version
+            0x68, 0x74, 0x74, 0x70, 0x3a, 0x2f, 0x2f, 0x74, 0x65,
+            0x73, 0x74, 0x75, 0x72, 0x6c, 0x2e, 0x63, 0x6f, 0x6d
+            // http://testurl.com
             ]
         )
     }

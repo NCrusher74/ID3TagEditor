@@ -21,10 +21,11 @@ class ID3FrameBooleanContentParser {
         let headerSize = id3FrameConfiguration.headerSizeFor(version: version)
         let frameContentRangeStart = headerSize
         let frameContent = frame.subdata(in: frameContentRangeStart..<frame.count)
-        if let frameContentAsString = String(data: frameContent, encoding: .utf8).flatMap(Bool.init) {
-            return frameContentAsString
-        } else {
+        
+        if frameContent.last == 0x00 {
             return false
+        } else {
+            return true
         }
     }
 }
