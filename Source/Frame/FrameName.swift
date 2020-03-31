@@ -30,14 +30,6 @@ public enum FrameName: Hashable {
     /// Comment frame name
     case Comment
     /// Compilation flag. ITunes Specific.
-    /* The ID3.org site says this:
-    This is a simple text frame that iTunes uses to indicate if the file is part of a compilation.
-
-    Information
-        1 if part of a compilation
-        0 or not present if not part of a compilation
-
-    In other words, it's a bool in text form.*/
     case ITunesCompilation
     /// Composer frame name.
     case Composer
@@ -104,19 +96,6 @@ public enum FrameName: Hashable {
     /// Playlist Delay frame name
     case PlaylistDelay
     /// Podcast frame name
-    /* TagLib describes this frame as "a frame with four zero bytes". Since the mp3tag help documentation describes this frame and the Compilation frame in literally the exact same words, I'm going to assume they're the same, in other words, a boolean expressed as a 4-byte string.
-     
-     from mp3tag docs: https://help.mp3tag.de/main_tags.html#TCMP:
-     COMPILATION
-
-     Syntax: Either enter the value 1 or delete the field
-     Note: Unofficial field that is only used by iTunes/iPod to mark albums as sampler.
-     
-     PODCAST
-
-     Syntax: Either enter the value 1 or delete the field
-     Note: Unofficial field that is only used by iTunes/iPod to mark tracks as podcasts.
-     */
     case Podcast
     /// Podcast category frame name. Version 2.3 and 2.4 only.
     case PodcastCategory
