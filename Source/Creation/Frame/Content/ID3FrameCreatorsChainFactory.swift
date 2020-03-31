@@ -29,7 +29,10 @@ class ID3FrameCreatorsChainFactory {
             stringToBytesAdapter: ID3ISO88591StringToByteAdapter(paddingAdder: paddingAdder,
                                                                  frameConfiguration: frameConfiguration)
         )
-        let frameFromURLStringContentCreator = ID3FrameFromURLStringContentCreator(frameContentSizeCalculator: frameContentSizeCalculator, frameFlagsCreator: frameFlagsCreator)
+        let frameFromURLStringContentCreator = ID3FrameFromURLStringContentCreator(frameContentSizeCalculator: frameContentSizeCalculator, frameFlagsCreator: frameFlagsCreator
+        )
+        let frameFromBooleanContentCreator = ID3FrameFromBooleanContentCreator(frameContentSizeCalculator: frameContentSizeCalculator, frameFlagsCreator: frameFlagsCreator
+        )
         let frameFromMultiStringISO88591ContentCreator = ID3CommentTypesFrameCreator(
             frameContentSizeCalculator: frameContentSizeCalculator,
             frameFlagsCreator: frameFlagsCreator,
@@ -102,6 +105,10 @@ class ID3FrameCreatorsChainFactory {
             frameCreator: frameFromStringUTF16ContentCreator,
             id3FrameConfiguration: frameConfiguration
         )
+        let iTunesCompilationFlagFrameCreator = ID3ITunesCompilationFlagFrameCreator(
+            frameCreator: frameFromBooleanContentCreator,
+            id3FrameConfiguration: frameConfiguration
+        )
         let iTunesGroupingFrameCreator = ID3iTunesGroupingFrameCreator(
             frameCreator: frameFromStringUTF16ContentCreator,
             id3FrameConfiguration: frameConfiguration
@@ -144,6 +151,10 @@ class ID3FrameCreatorsChainFactory {
         )
         let playlistDelayFrameCreator = ID3PlaylistDelayFrameCreator(
             frameCreator: frameFromStringUTF16ContentCreator,
+            id3FrameConfiguration: frameConfiguration
+        )
+        let podcastFlagFrameCreator = ID3PodcastFlagFrameCreator(
+            frameCreator: frameFromBooleanContentCreator,
             id3FrameConfiguration: frameConfiguration
         )
         let podcastCategoryFrameCreator = ID3PodcastCategoryFrameCreator(
@@ -361,6 +372,8 @@ class ID3FrameCreatorsChainFactory {
         podcastUrlFrameCreator.nextCreator = publisherUrlFrameCreator
         publisherUrlFrameCreator.nextCreator = radioStationUrlFrameCreator
         radioStationUrlFrameCreator.nextCreator = userDefinedUrlFrameCreator
+        userDefinedUrlFrameCreator.nextCreator = iTunesCompilationFlagFrameCreator
+        iTunesCompilationFlagFrameCreator.nextCreator = podcastFlagFrameCreator
         return albumFrameCreator
     }
 }

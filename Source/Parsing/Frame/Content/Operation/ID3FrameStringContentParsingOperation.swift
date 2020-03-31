@@ -7,7 +7,7 @@
 
 import Foundation
 
-typealias createUrlFrameOperation = (String) -> ((FrameName, ID3Frame))
+typealias createFrameOperation = (String) -> ((FrameName, ID3Frame))
 
 class ID3FrameStringContentParsingOperation: FrameContentParsingOperation {
     private var stringContentParser: ID3FrameStringContentParser

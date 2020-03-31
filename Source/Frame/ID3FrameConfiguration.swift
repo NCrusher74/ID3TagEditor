@@ -147,16 +147,13 @@ class ID3FrameConfiguration {
             .RecordingHourMinute : [UInt8]("TIME".utf8)
         ],
         .version4 : [
-            //.EncodingTime : [UInt8]("TDEN".utf8),
             //.InvolvedPeople : [UInt8]("TIPL".utf8),
             .Mood : [UInt8]("TMOO".utf8),
             //.MusicianCredits : [UInt8]("TMCL".utf8),
             //.OriginalYear : [UInt8]("TDOR".utf8),
-            //.ProducedNotice : [UInt8]("TPRO".utf8),
             .RecordingDateTime : [UInt8]("TDRC".utf8),
             .SetSubtitle : [UInt8]("TSST".utf8),
             .SortPerformer : [UInt8]("TSOP".utf8),
-            //.TaggingDate : [UInt8]("TDTG".utf8),
         ]
     ]
     private let commonNamesForIdentifiers: [String : FrameType] = [
@@ -277,15 +274,13 @@ class ID3FrameConfiguration {
             "TIME" : .RecordingHourMinute
         ],
         .version4 : [
-            //"TDEN" : .EncodingTime,
             //"TIPL" : .InvolvedPeople,
             //"TMCL" : .MusicianCredits,
+            //"TDOR" : .OriginalYear,
             "TMOO" : .Mood,
             "TSOP" : .SortPerformer,
-            //"TPRO" : .ProducedNotice,
             "TDRC" : .RecordingDateTime,
             "TSST" : .SetSubtitle,
-            //"TDTG" : .TaggingDate,
         ]
     ]
     private let encodingPositionInBytes: [ID3Version : Int] = [

@@ -1,13 +1,13 @@
 //
 //  ID3FrameURLStringContentParsingOperation.swift
 //
-//  Created by Fabrizio Duroni on 26/02/2018.
+//  Created by Nolaine Crusher on 03/30/2020.
 //  2018 Fabrizio Duroni.
 //
 
 import Foundation
 
-typealias createFrameOperation = (String) -> ((FrameName, ID3Frame))
+typealias createUrlFrameOperation = (String) -> ((FrameName, ID3Frame))
 
 class ID3FrameURLStringContentParsingOperation: FrameContentParsingOperation {
     private var urlStringContentParser: ID3FrameURLStringContentParser

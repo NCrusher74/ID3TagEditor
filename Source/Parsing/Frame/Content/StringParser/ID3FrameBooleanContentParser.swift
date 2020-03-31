@@ -1,5 +1,5 @@
 //
-//  ID3FrameURLStringContentParser.swift
+//  ID3FrameBooleanContentParser.swift
 //
 //  Created by Nolaine Crusher on 03/30/2020.
 //  2018 Fabrizio Duroni.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ID3FrameURLStringContentParser {
+class ID3FrameBooleanContentParser {
     private let paddingRemover: PaddingRemover
     private let id3FrameConfiguration: ID3FrameConfiguration
     
@@ -17,14 +17,14 @@ class ID3FrameURLStringContentParser {
         self.id3FrameConfiguration = id3FrameConfiguration
     }
     
-    func parse(frame: Data, version: ID3Version) -> String? {
+    func parse(frame: Data, version: ID3Version) -> Bool? {
         let headerSize = id3FrameConfiguration.headerSizeFor(version: version)
         let frameContentRangeStart = headerSize
         let frameContent = frame.subdata(in: frameContentRangeStart..<frame.count)
-        if let frameContentAsString = String(data: frameContent, encoding: .ascii) {
-            return paddingRemover.removeFrom(string: frameContentAsString)
+        if let frameContentAsString = String(data: frameContent, encoding: .utf8).flatMap(Bool.init) {
+            return frameContentAsString
         } else {
-            return nil
+            return false
         }
     }
 }
