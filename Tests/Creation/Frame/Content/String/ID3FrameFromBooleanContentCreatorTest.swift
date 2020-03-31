@@ -10,9 +10,13 @@ import XCTest
 
 class ID3BooleanFrameCreatorTest: XCTestCase {
     func testCreatorFrameFromBooleanContent() {
-        let id3BooleanFrameCreator = ID3FrameWithBooleanContent(value: value)
-        
-        let frameBytes = id3BooleanFrameCreator(
+        let id3FrameFromBooleanContentCreator = ID3FrameFromBooleanContentCreator(
+                frameContentSizeCalculator: MockFrameContentSizeCalculator(),
+                frameFlagsCreator: MockFrameFlagsCreator()
+        )
+
+
+        let frameBytes = id3FrameFromBooleanContentCreator.createFrame(
             frameIdentifier: [0x22],
             version: .version3,
             value: false
@@ -22,7 +26,7 @@ class ID3BooleanFrameCreatorTest: XCTestCase {
             frameBytes,
             [
                 0x22, // Identifier (See above.)
-                0x00, 0x00, 0x00, 0x28, // Size
+                0x00, 0x00, 0x00, 0x28, // Size -- where do I get this?
                 0x00, 0x00, // Flags
                 0x01, // UCS‐2
                 0x00, 0x00, 0x00, 0x00 // “false”
