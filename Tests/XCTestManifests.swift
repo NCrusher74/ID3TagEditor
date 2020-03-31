@@ -497,6 +497,20 @@ extension ID3LanguageFrameCreatorTest {
     ]
 }
 
+extension ID3ITunesCompilationFlagFrameCreatorTest {
+    static let __allTests = [
+        ("testFrameCreationWhenCompilationFlagIsZero", testFrameCreationWhenCompilationFlagIsZero),
+        ("testFrameCreationWhenCompilationFlagIsOne", testFrameCreationWhenCompilationFlagIsOne),
+    ]
+}
+
+extension ID3PodcastFlagFrameCreatorTest {
+    static let __allTests = [
+        ("testFrameCreationWhenPodcastFlagIsZero", testFrameCreationWhenPodcastFlagIsZero),
+        ("testFrameCreationWhenPodcastFlagIsOne", testFrameCreationWhenPodcastFlagIsOne),
+    ]
+}
+
 extension ID3TrackPositionCreatorTest {
     static let __allTests = [
         ("testFrameCreationWhenThereIsATrackPosition", testFrameCreationWhenThereIsATrackPosition),
@@ -557,26 +571,53 @@ public func __allTests() -> [XCTestCaseEntry] {
         testCase(ID3AlbumArtistFrameCreatorTest.__allTests),
         testCase(ID3AlbumFrameCreatorTest.__allTests),
         testCase(ID3ArtistFrameCreatorTest.__allTests),
+        testCase(ID3ArtistUrlFrameCreatorTest.__allTests),
+        testCase(ID3AudioFileUrlFrameCreatorTest.__allTests),
+        testCase(ID3AudioSourceUrlFrameCreatorTest.__allTests),
+        testCase(ID3BPMFrameCreatorTest.__allTests),
         testCase(ID3ComposerFrameCreatorTest.__allTests),
         testCase(ID3ConductorFrameCreatorTest.__allTests),
         testCase(ID3ContentGroupFrameCreatorTest.__allTests),
         testCase(ID3CopyrightFrameCreatorTest.__allTests),
+        testCase(ID3CopyrightUrlFrameCreatorTest.__allTests),
         testCase(ID3DiscPositionFrameCreatorTest.__allTests),
         testCase(ID3EncodedByFrameCreatorTest.__allTests),
         testCase(ID3EncoderSettingsFrameCreatorTest.__allTests),
         testCase(ID3FileTypeFrameCreatorTest.__allTests),
         testCase(ID3FileOwnerFrameCreatorTest.__allTests),
-        testCase(ID3iTunesGroupingFrameCreatorTest.__allTests),
+        testCase(ID3InitialKeyFrameCreatorTest.__allTests),
+        testCase(ID3ITunesGroupingFrameCreatorTest.__allTests),
+        testCase(ID3LengthFrameCreatorTest.__allTests),
         testCase(ID3LyricistFrameCreatorTest.__allTests),
         testCase(ID3MediaTypeFrameCreatorTest.__allTests),
+        testCase(ID3MoodFrameCreatorTest.__allTests),
         testCase(ID3ArrangerFrameCreatorTest.__allTests),
         testCase(ID3ItunesMovementIndexFrameCreatorTest.__allTests),
         testCase(ID3ItunesMovementNameFrameCreatorTest.__allTests),
+        testCase(ID3ItunesCompilationFlagFrameCreatorTest.__allTests),
+        testCase(ID3OriginalArtistFrameCreatorTest.__allTests),
+        testCase(ID3OriginalAlbumFrameCreatorTest.__allTests),
+        testCase(ID3OriginalFilenameFrameCreatorTest.__allTests),
+        testCase(ID3OriginalLyricistFrameCreatorTest.__allTests),
+        testCase(ID3PlaylistDelayFrameCreatorTest.__allTests),
         testCase(ID3PodcastCategoryFrameCreatorTest.__allTests),
         testCase(ID3PodcastDescriptionFrameCreatorTest.__allTests),
         testCase(ID3PodcastIDFrameCreatorTest.__allTests),
         testCase(ID3PodcastKeywordsFrameCreatorTest.__allTests),
+        testCase(ID3PodcastFlagFrameCreatorTest.__allTests),
+        testCase(ID3PodcastUrlFrameCreatorTest.__allTests),
         testCase(ID3PublisherFrameCreatorTest.__allTests),
+        testCase(ID3PublisherUrlFrameCreatorTest.__allTests),
+        testCase(ID3RadioStationFrameCreatorTest.__allTests),
+        testCase(ID3RadioStationOwnerFrameCreatorTest.__allTests),
+        testCase(ID3RadioStationUrlFrameCreatorTest.__allTests),
+        testCase(ID3UserDefinedUrlFrameCreatorTest.__allTests),
+        testCase(ID3SetSubtitleFrameCreatorTest.__allTests),
+        testCase(ID3SortArtistFrameCreatorTest.__allTests),
+        testCase(ID3SortAlbumFrameCreatorTest.__allTests),
+        testCase(ID3SortAlbumArtistFrameCreatorTest.__allTests),
+        testCase(ID3SortComposerFrameCreatorTest.__allTests),
+        testCase(ID3SortTitleFrameCreatorTest.__allTests),
         testCase(ID3SubtitleFrameCreatorTest.__allTests),
         testCase(ID3UnsyncedLyricsFrameCreatorTest.__allTests),
         testCase(ID3CommentFrameCreatorTest.__allTests),
