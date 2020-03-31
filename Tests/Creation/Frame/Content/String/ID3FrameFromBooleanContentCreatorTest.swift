@@ -31,6 +31,7 @@ class ID3BooleanFrameCreatorTest: XCTestCase {
                 0x01, // UCS‐2
                 0x00, 0x00, 0x00, 0x00 // “false”
             ]
+            // fails XCTAssertEqual failed: ("[34, 17, 0, 0, 0, 0, 0]") is not equal to ("[34, 0, 0, 0, 40, 0, 0, 1, 0, 0, 0, 0]") ugh
         )
     }
 }
