@@ -156,34 +156,34 @@ public enum FrameName: Hashable {
     /// AttachedPicture frame name
     /// - pictureType:
     case AttachedPicture(_ pictureType: ID3PictureType)
-
+    
     internal var fourByteString: String? {
-      switch self {
-      case .Comment:
-        return "COMM"
-      case .UnsyncedLyrics:
-        return "USLT"
-      case .UserDefinedTextInformation:
-        return "TXXX"
-      case .UserDefinedUrl:
-        return "WXXX"
-      default:
-        return nil
-      }
+        switch self {
+            case .Comment:
+                return "COMM"
+            case .UnsyncedLyrics:
+                return "USLT"
+            case .UserDefinedTextInformation:
+                return "TXXX"
+            case .UserDefinedUrl:
+                return "WXXX"
+            default:
+                return nil
+        }
     }
-
+    
     internal var threeByteString: String? {
-      switch self {
-      case .Comment:
-        return "COM"
-      case .UnsyncedLyrics:
-        return "ULT"
-      case .UserDefinedTextInformation:
-        return "TXX"
-      case .UserDefinedUrl:
-        return "WXX"
-      default:
-        return nil
-      }
+        switch self {
+            case .Comment:
+                return "COM"
+            case .UnsyncedLyrics:
+                return "ULT"
+            case .UserDefinedTextInformation:
+                return "TXX"
+            case .UserDefinedUrl:
+                return "WXX"
+            default:
+                return nil
+        }
     }
 }

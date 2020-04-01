@@ -296,27 +296,27 @@ class ID3FrameConfiguration {
         self.nameForIdentifier[.version3] = self.nameForIdentifier[.version3]?.merging(commonNamesForIdentifiers) { $1 }
         self.nameForIdentifier[.version4] = self.nameForIdentifier[.version4]?.merging(commonNamesForIdentifiers) { $1 }
     }
-
+    
     func headerSizeFor(version: ID3Version) -> Int {
         return headerSizesInBytes[version]!
     }
-
+    
     func sizeOffsetFor(version: ID3Version) -> Int {
         return sizeOffsetInBytes[version]!
     }
-
+    
     func sizeMaskFor(version: ID3Version) -> UInt32 {
         return sizeMask[version]!
     }
-
+    
     func identifierSizeFor(version: ID3Version) -> Int {
         return identifierSizeInBytes[version]!
     }
-
+    
     func identifierFor(frameType: FrameType, version: ID3Version) -> [UInt8] {
         return identifiers[version]![frameType]!
     }
-
+    
     func frameTypeFor(identifier: String, version: ID3Version) -> FrameType {
         return nameForIdentifier[version]![identifier] ?? .Invalid
     }
@@ -328,7 +328,7 @@ class ID3FrameConfiguration {
     func encodingPositionFor(version: ID3Version) -> Int {
         return encodingPositionInBytes[version]!
     }
-
+    
     func encodingByteFor(version: ID3Version, encoding: ID3StringEncoding) -> [UInt8] {
         return [encoding.rawValue]
     }

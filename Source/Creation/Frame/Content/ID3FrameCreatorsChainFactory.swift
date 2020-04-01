@@ -20,14 +20,20 @@ class ID3FrameCreatorsChainFactory {
         let frameFromStringUTF16ContentCreator = ID3FrameFromStringContentCreator(
             frameContentSizeCalculator: frameContentSizeCalculator,
             frameFlagsCreator: frameFlagsCreator,
-            stringToBytesAdapter: ID3UTF16StringToByteAdapter(paddingAdder: paddingAdder,
-                                                              frameConfiguration: frameConfiguration)
+            stringToBytesAdapter: ID3UTF16StringToByteAdapter(
+                paddingAdder: paddingAdder,
+                frameConfiguration: frameConfiguration)
         )
         let frameFromStringISO88591ContentCreator = ID3FrameFromStringContentCreator(
             frameContentSizeCalculator: frameContentSizeCalculator,
             frameFlagsCreator: frameFlagsCreator,
-            stringToBytesAdapter: ID3ISO88591StringToByteAdapter(paddingAdder: paddingAdder,
-                                                                 frameConfiguration: frameConfiguration)
+            stringToBytesAdapter: ID3ISO88591StringToByteAdapter(
+                paddingAdder: paddingAdder,
+                frameConfiguration: frameConfiguration)
+        )
+        let frameFromURLStringContentCreator = ID3FrameFromURLStringContentCreator(
+            frameContentSizeCalculator: frameContentSizeCalculator,
+            frameFlagsCreator: frameFlagsCreator
         )
         let frameFromURLStringContentCreator = ID3FrameFromURLStringContentCreator(frameContentSizeCalculator: frameContentSizeCalculator, frameFlagsCreator: frameFlagsCreator
         )
@@ -36,14 +42,16 @@ class ID3FrameCreatorsChainFactory {
         let frameFromMultiStringISO88591ContentCreator = ID3CommentTypesFrameCreator(
             frameContentSizeCalculator: frameContentSizeCalculator,
             frameFlagsCreator: frameFlagsCreator,
-            stringToBytesAdapter: ID3ISO88591StringToByteAdapter(paddingAdder: paddingAdder,
-                                                                 frameConfiguration: frameConfiguration)
+            stringToBytesAdapter: ID3ISO88591StringToByteAdapter(
+                paddingAdder: paddingAdder,
+                frameConfiguration: frameConfiguration)
         )
         let frameFromUserTextISO88591ContentCreator = ID3CommentTypesFrameCreator(
             frameContentSizeCalculator: frameContentSizeCalculator,
             frameFlagsCreator: frameFlagsCreator,
-            stringToBytesAdapter: ID3ISO88591StringToByteAdapter(paddingAdder: paddingAdder,
-                                                                 frameConfiguration: frameConfiguration)
+            stringToBytesAdapter: ID3ISO88591StringToByteAdapter(
+                paddingAdder: paddingAdder,
+                frameConfiguration: frameConfiguration)
         )
         let albumFrameCreator = ID3AlbumFrameCreator(
             frameCreator: frameFromStringUTF16ContentCreator,
@@ -62,7 +70,7 @@ class ID3FrameCreatorsChainFactory {
             id3FrameConfiguration: frameConfiguration
         )
         let bpmFrameCreator = ID3BPMFrameCreator(
-            frameCreator: frameFromStringUTF16ContentCreator,
+            frameCreator: frameFromStringISO88591ContentCreator,
             id3FrameConfiguration: frameConfiguration
         )
         let composerFrameCreator = ID3ComposerFrameCreator(
@@ -102,7 +110,7 @@ class ID3FrameCreatorsChainFactory {
             id3FrameConfiguration: frameConfiguration
         )
         let isrcFrameCreator = ID3ISRCFrameCreator(
-            frameCreator: frameFromStringUTF16ContentCreator,
+            frameCreator: frameFromStringISO88591ContentCreator,
             id3FrameConfiguration: frameConfiguration
         )
         let iTunesCompilationFlagFrameCreator = ID3ITunesCompilationFlagFrameCreator(
@@ -114,7 +122,7 @@ class ID3FrameCreatorsChainFactory {
             id3FrameConfiguration: frameConfiguration
         )
         let lengthFrameCreator = ID3LengthFrameCreator(
-            frameCreator: frameFromStringUTF16ContentCreator,
+            frameCreator: frameFromStringISO88591ContentCreator,
             id3FrameConfiguration: frameConfiguration
         )
         let lyricistFrameCreator = ID3LyricistFrameCreator(
@@ -150,7 +158,7 @@ class ID3FrameCreatorsChainFactory {
             id3FrameConfiguration: frameConfiguration
         )
         let playlistDelayFrameCreator = ID3PlaylistDelayFrameCreator(
-            frameCreator: frameFromStringUTF16ContentCreator,
+            frameCreator: frameFromStringISO88591ContentCreator,
             id3FrameConfiguration: frameConfiguration
         )
         let podcastFlagFrameCreator = ID3PodcastFlagFrameCreator(
@@ -294,6 +302,14 @@ class ID3FrameCreatorsChainFactory {
             id3FrameConfiguration: frameConfiguration
         )
         let discPositionFrameCreator = ID3DiscPositionFrameCreator(
+            frameCreator: frameFromStringISO88591ContentCreator,
+            id3FrameConfiguration: frameConfiguration
+        )
+        let iTunesCompilationFlagFrameCreator = ID3ItunesCompilationFlagFrameCreator(
+            frameCreator: frameFromStringISO88591ContentCreator,
+            id3FrameConfiguration: frameConfiguration
+        )
+        let podcastFlagFrameCreator = ID3PodcastFlagFrameCreator(
             frameCreator: frameFromStringISO88591ContentCreator,
             id3FrameConfiguration: frameConfiguration
         )

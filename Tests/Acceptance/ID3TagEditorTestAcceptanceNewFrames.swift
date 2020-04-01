@@ -425,7 +425,7 @@ class ID3TagEditorTestAcceptanceNewFrames: XCTestCase {
                 .OriginalFilename : ID3FrameWithStringContent(content: "Original Filename"),
                 .OriginalLyricist : ID3FrameWithStringContent(content: "Original Lyricist"),
                 .PlaylistDelay : ID3FrameWithStringContent(content: "20"),
-                .Podcast : ID3FrameWithBooleanContent(value: true),
+                .Podcast: ID3FrameWithBooleanContent(value: true),
                 .PodcastCategory : ID3FrameWithStringContent(content: "Podcast Category"),
                 .PodcastDescription : ID3FrameWithStringContent(content: "Podcast Description"),
                 .PodcastID : ID3FrameWithStringContent(content: "Podcast ID"),

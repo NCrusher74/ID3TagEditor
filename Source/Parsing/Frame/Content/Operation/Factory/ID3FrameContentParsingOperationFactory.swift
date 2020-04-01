@@ -33,6 +33,7 @@ class ID3FrameContentParsingOperationFactory {
             .Genre: ID3GenreFrameContentParsingOperationFactory.make(),
             .InitialKey: ID3InitialKeyFrameContentParsingOperationFactory.make(),
             .ISRC: ID3ISRCFrameContentParsingOperationFactory.make(),
+            .ITunesCompilation: ID3ITunesCompilationFlagFrameContentParsingOperationFactory.make(),
             .ITunesGrouping: ID3iTunesGroupingFrameContentParsingOperationFactory.make(),
             .ITunesMovementCount: ID3ITunesMovementCountFrameContentParsingOperationFactory.make(),
             .ITunesMovementIndex: ID3ITunesMovementIndexFrameContentParsingOperationFactory.make(),

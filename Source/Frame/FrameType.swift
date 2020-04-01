@@ -80,7 +80,7 @@ enum FrameType: String, Equatable {
     case RecordingDateTime = "recodingDateTime"
     case AttachedPicture = "artwork"
     case Invalid = ""
-
+    
     static func ==(lhs: FrameType, rhs: FrameType) -> Bool {
         return lhs.rawValue == rhs.rawValue
     }

@@ -1,5 +1,5 @@
 //
-//  ID3PodcastFlagFrameContentParsingOperationFactory.swift
+//  ID3ITunesCompilationFlagFrameContentParsingOperationFactory.swift
 //
 //
 //  Created by Nolaine Crusher on 3/31/20.
@@ -8,10 +8,10 @@
 
 import Foundation
 
-class ID3PodcastFlagFrameContentParsingOperationFactory {
+class ID3ITunesCompilationFlagFrameContentParsingOperationFactory {
     static func make() -> ID3FrameStringContentParsingOperation {
         return ID3FrameStringContentParsingOperationFactory.make() { (content: String) in
-            return (.Podcast, ID3FrameWithBooleanContent(value: Bool(content)))
+            return (.ITunesCompilation, ID3FrameWithBooleanContent(value: Bool(content)))
         }
     }
 }
