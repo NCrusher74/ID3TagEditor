@@ -17,7 +17,7 @@ class ID3ChapterTypeFrameCreatorTest: XCTestCase {
                 synchsafeEncoder: SynchsafeIntegerEncoder()
             ),
             frameFlagsCreator: ID3FrameFlagsCreator(),
-            stringToBytesAdapter: ID3UTF16StringToByteAdapter(
+            stringToBytesAdapter: ID3ISO88591StringToByteAdapter(
                 paddingAdder: PaddingAdderToEndOfContentUsingNullChar(),
                 frameConfiguration: ID3FrameConfiguration()
             ), frameCreatorsChain: ID3FrameCreatorsChain()

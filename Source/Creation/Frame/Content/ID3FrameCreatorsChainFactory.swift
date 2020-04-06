@@ -58,6 +58,13 @@ class ID3FrameCreatorsChainFactory {
                 paddingAdder: paddingAdder,
                 frameConfiguration: frameConfiguration)
         )
+        let chapterFrameContentCreator = ID3ChapterTypeFrameCreator(
+            frameContentSizeCalculator: frameContentSizeCalculator,
+            frameFlagsCreator: frameFlagsCreator,
+            stringToBytesAdapter: ID3ISO88591StringToByteAdapter(
+                paddingAdder: paddingAdder,
+                frameConfiguration: frameConfiguration), frameCreatorsChain: ID3FrameCreatorsChain()
+        )
         
         // MARK: Specific Frame Creators (Text)
         let albumFrameCreator = ID3AlbumFrameCreator(
@@ -259,6 +266,10 @@ class ID3FrameCreatorsChainFactory {
             frameCreator: frameFromStringISO88591ContentCreator,
             id3FrameConfiguration: frameConfiguration
         )
+        let chapterFrameCreator = ID3ChapterFrameCreator(
+            frameCreator: chapterFrameContentCreator,
+            id3FrameConfiguration: frameConfiguration
+        )
         let commentFrameCreator = ID3CommentFrameCreator(
             frameCreator: frameFromMultiStringISO88591ContentCreator,
             id3FrameConfiguration: frameConfiguration
@@ -399,6 +410,7 @@ class ID3FrameCreatorsChainFactory {
         userDefinedUrlFrameCreator.nextCreator = iTunesCompilationFlagFrameCreator
         iTunesCompilationFlagFrameCreator.nextCreator = involvedPeopleListFrameCreator
         involvedPeopleListFrameCreator.nextCreator = musicianCreditsListFrameCreator
+        musicianCreditsListFrameCreator.nextCreator = chapterFrameCreator
         return albumFrameCreator
     }
 }
