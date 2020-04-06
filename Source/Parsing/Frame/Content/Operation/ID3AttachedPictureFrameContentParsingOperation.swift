@@ -12,30 +12,33 @@ class ID3AttachedPictureFrameContentParsingOperation: FrameContentParsingOperati
     private let pngMagicNumber: Data =  Data([0x89, 0x50, 0x4E, 0x47])
     private let id3FrameConfiguration: ID3FrameConfiguration
     private let pictureTypeAdapter: PictureTypeAdapter
-
+    
     init(id3FrameConfiguration: ID3FrameConfiguration, pictureTypeAdapter: PictureTypeAdapter) {
         self.id3FrameConfiguration = id3FrameConfiguration
         self.pictureTypeAdapter = pictureTypeAdapter
     }
-
+    
     func parse(frame: Data, version: ID3Version, completed: (FrameName, ID3Frame) -> ()) {
-        parseToCheckIfThereIsAnImageUsing(magicNumber: jpegMagicNumber,
-                                          format: .Jpeg,
-                                          frame: frame,
-                                          version: version,
-                                          completed: completed)
-        parseToCheckIfThereIsAnImageUsing(magicNumber: pngMagicNumber,
-                                          format: .Png,
-                                          frame: frame,
-                                          version: version,
-                                          completed: completed)
+        parseToCheckIfThereIsAnImageUsing(
+            magicNumber: jpegMagicNumber,
+            format: .Jpeg,
+            frame: frame,
+            version: version,
+            completed: completed)
+        parseToCheckIfThereIsAnImageUsing(
+            magicNumber: pngMagicNumber,
+            format: .Png,
+            frame: frame,
+            version: version,
+            completed: completed)
     }
-
-    private func parseToCheckIfThereIsAnImageUsing(magicNumber: Data,
-                                                   format: ID3PictureFormat,
-                                                   frame: Data,
-                                                   version: ID3Version,
-                                                   completed: (FrameName, ID3Frame) -> ()) {
+    
+    private func parseToCheckIfThereIsAnImageUsing(
+        magicNumber: Data,
+        format: ID3PictureFormat,
+        frame: Data,
+        version: ID3Version,
+        completed: (FrameName, ID3Frame) -> ()) {
         if let magicNumberRange = frame.range(of: magicNumber) {
             let pictureType = pictureTypeAdapter.adapt(frame: frame, format: format, version: version)
             let attachedPictureFrame = ID3FrameAttachedPicture(

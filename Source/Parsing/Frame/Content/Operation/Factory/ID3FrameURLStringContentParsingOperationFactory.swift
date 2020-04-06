@@ -10,7 +10,8 @@ import Foundation
 class ID3FrameURLStringContentParsingOperationFactory {
     static func make(operation: @escaping createFrameOperation) -> ID3FrameURLStringContentParsingOperation {
         let stringContentParser = ID3FrameURLStringContentParserFactory.make()
-        return ID3FrameURLStringContentParsingOperation(urlStringContentParser: stringContentParser,
-                                                     assignToTagOperation: operation)
+        return ID3FrameURLStringContentParsingOperation(
+            urlStringContentParser: stringContentParser,
+            assignToTagOperation: operation)
     }
 }

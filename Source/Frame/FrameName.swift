@@ -26,7 +26,7 @@ public enum FrameName: Hashable {
     /// Beats per Minute frame
     case BPM
     /// Chapter frame nme. Valid only for tag version 2.3 and 2.4
-    //case Chapter
+    case Chapter
     /// Comment frame name
     case Comment
     /// Compilation flag. ITunes Specific.
@@ -132,7 +132,7 @@ public enum FrameName: Hashable {
     /// Subtitle frame name
     case Subtitle
     /// Table of Contents frame name. Valid only for tag version 2.3 and 2.4
-    //case TableOfContents
+    case TableOfContents
     /// Title frame name.
     case Title
     /// Track Position frame name.

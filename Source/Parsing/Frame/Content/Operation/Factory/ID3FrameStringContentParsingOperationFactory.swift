@@ -10,7 +10,8 @@ import Foundation
 class ID3FrameStringContentParsingOperationFactory {
     static func make(operation: @escaping createFrameOperation) -> ID3FrameStringContentParsingOperation {
         let stringContentParser = ID3FrameStringContentParserFactory.make()
-        return ID3FrameStringContentParsingOperation(stringContentParser: stringContentParser,
-                                                     assignToTagOperation: operation)
+        return ID3FrameStringContentParsingOperation(
+            stringContentParser: stringContentParser,
+            assignToTagOperation: operation)
     }
 }

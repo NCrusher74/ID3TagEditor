@@ -22,7 +22,7 @@ class ID3FramesCreator {
         frames.append(contentsOf: createFramesEnd())
         return frames
     }
-    
+
     private func thereIsNotValidDataIn(frames: [UInt8]) -> Bool {
         return frames.count == 0
     }

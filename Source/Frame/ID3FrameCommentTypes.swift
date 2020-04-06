@@ -21,7 +21,7 @@ public class ID3FrameCommentTypes: ID3Frame, Equatable, CustomDebugStringConvert
     public var content: String
     /// ID3FrameCommentLyrics description, useful for debug.
     public var debugDescription: String {
-        return "\(String(describing: language)) - \(String(describing: description)) - \(String(describing: content)))"
+        return "\(String(describing: language)) - \(String(describing: description)) - \(String(describing: content))"
     }
     
     /**
