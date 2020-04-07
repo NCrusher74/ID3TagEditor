@@ -18,6 +18,7 @@ class ID3FrameContentParsingOperationFactory {
             .AudioFileUrl: ID3AudioFileUrlFrameContentParsingOperationFactory.make(),
             .AudioSourceUrl: ID3AudioSourceUrlFrameContentParsingOperationFactory.make(),
             .BPM: ID3BPMFrameContentParsingOperationFactory.make(),
+            .Chapter: ID3ChapterFrameContentParsingOperation(frameName: .Chapter),
             .Comment: ID3CommentFrameContentParsingOperation(frameName: .Comment),
             .Composer: ID3ComposerFrameContentParsingOperationFactory.make(),
             .Conductor: ID3ConductorFrameContentParsingOperationFactory.make(),
