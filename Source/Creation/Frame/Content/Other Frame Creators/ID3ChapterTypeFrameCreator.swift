@@ -14,21 +14,20 @@ class ID3ChapterTypeFrameCreator: ChapterFrameCreator {
     private let frameFlagsCreator: FrameFlagsCreator
     private let stringToBytesAdapter: StringToBytesAdapter
     private let frameCreatorsChain: ID3FrameCreatorsChain
+    private let uInt32ToByteArrayAdapter: UInt32ToByteArrayAdapter
 
     init(frameContentSizeCalculator: FrameContentSizeCalculator,
          frameFlagsCreator: FrameFlagsCreator,
          stringToBytesAdapter: StringToBytesAdapter,
-         frameCreatorsChain: ID3FrameCreatorsChain) {
+         frameCreatorsChain: ID3FrameCreatorsChain,
+         uInt32ToByteArrayAdapter: UInt32ToByteArrayAdapter) {
         self.frameContentSizeCalculator = frameContentSizeCalculator
         self.frameFlagsCreator = frameFlagsCreator
         self.stringToBytesAdapter = stringToBytesAdapter
         self.frameCreatorsChain = frameCreatorsChain
+        self.uInt32ToByteArrayAdapter = uInt32ToByteArrayAdapter
     }
     
-    private func getAsciiCodesOfDigits(_ n: Int)->[UInt8]{
-        return String(n).unicodeScalars.map{UInt8($0.value)}
-    }
-
     func createFrame(
         frameIdentifier: [UInt8],
         version: ID3Version,
@@ -58,10 +57,10 @@ class ID3ChapterTypeFrameCreator: ChapterFrameCreator {
                     includingEncoding: false,
                     includingTermination: true
                 ),
-                getAsciiCodesOfDigits(startTime),
-                getAsciiCodesOfDigits(endTime),
-                getAsciiCodesOfDigits(startingByteOffset),
-                getAsciiCodesOfDigits(endingByteOffset),
+                uInt32ToByteArrayAdapter.adapt(uInt32: UInt32(startTime)),
+                uInt32ToByteArrayAdapter.adapt(uInt32: UInt32(endTime)),
+                uInt32ToByteArrayAdapter.adapt(uInt32: UInt32(startingByteOffset)),
+                uInt32ToByteArrayAdapter.adapt(uInt32: UInt32(endingByteOffset)),
                 subframesAsBytes
                 ].joined()
         )

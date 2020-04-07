@@ -46,4 +46,56 @@ extension FrameParser {
         return rolePersonArray as! [(String, String)]
     }
     
+    internal func extractChapterElements(
+        from frameData: inout Data.SubSequence,
+        encoding: ID3StringEncoding,
+        id3Tag: ID3Tag,
+        frameSizeParser: FrameSizeParser,
+        id3FrameParser: ID3FrameParser,
+        frameContentParsingOperationFactory: ID3FrameContentParsingOperationFactory
+    ) -> (
+        elementID: String,
+        startTime: Int,
+        endTime: Int,
+        startByteOffset: Int,
+        endByteOffset: Int,
+        embeddedSubframes: [FrameName: ID3Frame]?
+        ) {
+            let elementID = frameData.extractPrefixAsStringUntilNullTermination(encoding)
+ 
+            let startTimeBytes = frameData.extractFirst(4)
+            let startTimeInt = // need reverse of UInt32ToByteArrayAdapter
+
+            let endTimeBytes = frameData.extractFirst(4)
+
+            let startByteOffsetBytes = frameData.extractFirst(4)
+
+            let endByteOffsetBytes = frameData.extractFirst(4)
+            
+            var embeddedSubframes: [FrameName: ID3Frame]? = [:]
+            let parsedSubframes = parse(
+                embeddedSubframes: frameData,
+                id3Tag: id3Tag,
+                frameSizeParser: frameSizeParser,
+                id3FrameParser: id3FrameParser)
+            // how do I get a [FrameName: ID3Frame] return from this?
+            
+            return (elementID, startTime, endTime, startByteOffset, endByteOffset, embeddedSubframes)
+    }
+  
+    func parse(embeddedSubframes: Data, id3Tag: ID3Tag, frameSizeParser: FrameSizeParser, id3FrameParser: ID3FrameParser) {
+        var currentFramePosition = 0
+        while currentFramePosition < embeddedSubframes.endIndex {
+            let frameSize = frameSizeParser.parse(
+                mp3: embeddedSubframes as NSData,
+                framePosition: currentFramePosition,
+                version: id3Tag.properties.version)
+            let frame = embeddedSubframes.subdata(with: NSMakeRange(currentFramePosition, min(frameSize, embeddedSubframes.endIndex - currentFramePosition)))
+            id3FrameParser.parse(frame: frame, frameSize: frameSize, id3Tag: id3Tag)
+            currentFramePosition += frame.count;
+        }
+    }
+
+    
+    
 }
