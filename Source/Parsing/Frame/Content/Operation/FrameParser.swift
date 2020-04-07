@@ -63,14 +63,10 @@ extension FrameParser {
         ) {
             let elementID = frameData.extractPrefixAsStringUntilNullTermination(encoding)
  
-            let startTimeBytes = frameData.extractFirst(4)
-            let startTimeInt = // need reverse of UInt32ToByteArrayAdapter
-
-            let endTimeBytes = frameData.extractFirst(4)
-
-            let startByteOffsetBytes = frameData.extractFirst(4)
-
-            let endByteOffsetBytes = frameData.extractFirst(4)
+            let startTime = Int(frameData.extractFirst(4).uint32)
+            let endTime = Int(frameData.extractFirst(4).uint32)
+            let startByteOffsets = Int(frameData.extractFirst(4).uint32)
+            let endByteOffset = Int(frameData.extractFirst(4).uint32)
             
             var embeddedSubframes: [FrameName: ID3Frame]? = [:]
             let parsedSubframes = parse(
