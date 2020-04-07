@@ -19,7 +19,7 @@ class ID3FrameURLStringContentParsingOperation: FrameContentParsingOperation {
         self.createFrameOperation = assignToTagOperation
     }
 
-    func parse(frame: Data, version: ID3Version, completed: (FrameName, ID3Frame) -> ()) {
+    func parse(frame: Data, version: ID3Version, subframePseudoTagParser: ID3SubframePseudoTagParser?, completed: (FrameName, ID3Frame) -> ()) {
         if let frameContent = urlStringContentParser.parse(frame: frame, version: version) {
             let frameNameAndFrame = createFrameOperation(frameContent)
             completed(frameNameAndFrame.0, frameNameAndFrame.1)

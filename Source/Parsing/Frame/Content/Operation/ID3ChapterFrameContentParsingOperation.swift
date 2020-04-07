@@ -1,5 +1,5 @@
 //
-//  ID3CreditsListFrameContentParsingOperation.swift
+//  ID3ChapterFrameContentParsingOperation.swift
 //
 //  Created by Nolaine Crusher on 4/06/20.
 //  2018 Fabrizio Duroni.
@@ -7,13 +7,13 @@
 
 import Foundation
 
-struct ID3ChapterFrameContentParsingOperation: FrameContentWithSubframesParsingOperation, FrameParser {
+struct ID3ChapterFrameContentParsingOperation: FrameContentParsingOperation, FrameParser {
     
     let frameName: FrameName
     
     func parse(frame: Data,
                version: ID3Version,
-               subframePseudoTagParser: ID3SubframePseudoTagParser,
+               subframePseudoTagParser: ID3SubframePseudoTagParser?,
                completed: (FrameName, ID3Frame) -> ()) {
         var parsing = frame[...]
         extractHeader(from: &parsing, version: version)
@@ -23,7 +23,7 @@ struct ID3ChapterFrameContentParsingOperation: FrameContentWithSubframesParsingO
         let parsed = extractChapterElements(
             from: &parsing,
             encoding: encoding,
-            subframePseudoTagParser: subframePseudoTagParser)
+            subframePseudoTagParser: subframePseudoTagParser!)
 
         let constructed = ID3ChapterFrame(
             elementID: parsed.elementID,

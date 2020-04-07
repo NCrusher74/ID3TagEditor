@@ -18,7 +18,7 @@ class ID3AttachedPictureFrameContentParsingOperation: FrameContentParsingOperati
         self.pictureTypeAdapter = pictureTypeAdapter
     }
     
-    func parse(frame: Data, version: ID3Version, completed: (FrameName, ID3Frame) -> ()) {
+    func parse(frame: Data, version: ID3Version, subframePseudoTagParser: ID3SubframePseudoTagParser?, completed: (FrameName, ID3Frame) -> ()) {
         parseToCheckIfThereIsAnImageUsing(
             magicNumber: jpegMagicNumber,
             format: .Jpeg,

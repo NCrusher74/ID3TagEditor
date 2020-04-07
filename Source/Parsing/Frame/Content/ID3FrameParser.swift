@@ -25,7 +25,7 @@ class ID3FrameParser {
         if (isAValid(frameType: frameType)) {
             frameContentParsingOperations[frameType]?.parse(
                 frame: frame,
-                version: id3Tag.properties.version,
+                version: id3Tag.properties.version, subframePseudoTagParser: nil,
                 completed: { frameName, frame in
                     frame.id3Identifier = frameIdentifier
                     frame.size = frameSize
