@@ -7,11 +7,14 @@
 
 import Foundation
 
-struct ID3ChapterFrameContentParsingOperation: FrameContentParsingOperation, FrameParser {
+struct ID3ChapterFrameContentParsingOperation: FrameContentWithSubframesParsingOperation, FrameParser {
     
     let frameName: FrameName
     
-    func parse(frame: Data, version: ID3Version, completed: (FrameName, ID3Frame) -> ()) {
+    func parse(frame: Data,
+               version: ID3Version,
+               subframePseudoTagParser: ID3SubframePseudoTagParser,
+               completed: (FrameName, ID3Frame) -> ()) {
         var parsing = frame[...]
         extractHeader(from: &parsing, version: version)
         
@@ -19,7 +22,8 @@ struct ID3ChapterFrameContentParsingOperation: FrameContentParsingOperation, Fra
         
         let parsed = extractChapterElements(
             from: &parsing,
-            encoding: encoding)
+            encoding: encoding,
+            subframePseudoTagParser: subframePseudoTagParser)
 
         let constructed = ID3ChapterFrame(
             elementID: parsed.elementID,
@@ -27,7 +31,7 @@ struct ID3ChapterFrameContentParsingOperation: FrameContentParsingOperation, Fra
             endTime: parsed.endTime,
             startByteOffset: parsed.startByteOffset,
             endByteOffset: parsed.endByteOffset,
-            embeddedSubframes: <#T##[FrameName : ID3Frame]#>
+            embeddedSubframes: parsed.embeddedSubframes ?? [:]
         )
         completed(frameName, constructed)
     }

@@ -63,7 +63,7 @@ class ID3FrameCreatorsChainFactory {
             frameFlagsCreator: frameFlagsCreator,
             stringToBytesAdapter: ID3ISO88591StringToByteAdapter(
                 paddingAdder: paddingAdder,
-                frameConfiguration: frameConfiguration), frameCreatorsChain: ID3FrameCreatorsChain()
+                frameConfiguration: frameConfiguration), frameCreatorsChain: ID3FrameCreatorsChain(), uInt32ToByteArrayAdapter: UInt32ToByteArrayAdapterUsingUnsafePointer()
         )
         
         // MARK: Specific Frame Creators (Text)

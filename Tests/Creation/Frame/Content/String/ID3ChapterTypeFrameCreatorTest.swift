@@ -20,7 +20,7 @@ class ID3ChapterTypeFrameCreatorTest: XCTestCase {
             stringToBytesAdapter: ID3ISO88591StringToByteAdapter(
                 paddingAdder: PaddingAdderToEndOfContentUsingNullChar(),
                 frameConfiguration: ID3FrameConfiguration()
-            ), frameCreatorsChain: ID3FrameCreatorsChain()
+            ), frameCreatorsChain: ID3FrameCreatorsChain(), uInt32ToByteArrayAdapter: UInt32ToByteArrayAdapterUsingUnsafePointer()
         )
         
         let frameBytes = id3ChapterTypeFrameCreator.createFrame(

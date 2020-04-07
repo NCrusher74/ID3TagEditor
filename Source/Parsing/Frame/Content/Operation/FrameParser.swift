@@ -49,10 +49,7 @@ extension FrameParser {
     internal func extractChapterElements(
         from frameData: inout Data.SubSequence,
         encoding: ID3StringEncoding,
-        id3Tag: ID3Tag,
-        frameSizeParser: FrameSizeParser,
-        id3FrameParser: ID3FrameParser,
-        frameContentParsingOperationFactory: ID3FrameContentParsingOperationFactory
+        subframePseudoTagParser: ID3SubframePseudoTagParser
     ) -> (
         elementID: String,
         startTime: Int,
@@ -61,37 +58,27 @@ extension FrameParser {
         endByteOffset: Int,
         embeddedSubframes: [FrameName: ID3Frame]?
         ) {
-            let elementID = frameData.extractPrefixAsStringUntilNullTermination(encoding)
- 
+            let elementID = frameData.extractPrefixAsStringUntilNullTermination(encoding) ?? "chXX"
+            
             let startTime = Int(frameData.extractFirst(4).uint32)
             let endTime = Int(frameData.extractFirst(4).uint32)
-            let startByteOffsets = Int(frameData.extractFirst(4).uint32)
+            let startByteOffset = Int(frameData.extractFirst(4).uint32)
             let endByteOffset = Int(frameData.extractFirst(4).uint32)
             
             var embeddedSubframes: [FrameName: ID3Frame]? = [:]
-            let parsedSubframes = parse(
-                embeddedSubframes: frameData,
-                id3Tag: id3Tag,
-                frameSizeParser: frameSizeParser,
-                id3FrameParser: id3FrameParser)
-            // how do I get a [FrameName: ID3Frame] return from this?
-            
-            return (elementID, startTime, endTime, startByteOffset, endByteOffset, embeddedSubframes)
+            var subframePseudoTag: ID3Tag?
+            while !frameData.isEmpty {
+                do {
+                    subframePseudoTag = try subframePseudoTagParser.parse(
+                    subframeData: frameData)
+                } catch { print("unable to parse subframes", error, error.localizedDescription) }
+                embeddedSubframes = subframePseudoTag?.frames
+            }
+            return (elementID: elementID,
+                    startTime: startTime,
+                    endTime: endTime,
+                    startByteOffset: startByteOffset,
+                    endByteOffset: endByteOffset,
+                    embeddedSubframes: embeddedSubframes)
     }
-  
-    func parse(embeddedSubframes: Data, id3Tag: ID3Tag, frameSizeParser: FrameSizeParser, id3FrameParser: ID3FrameParser) {
-        var currentFramePosition = 0
-        while currentFramePosition < embeddedSubframes.endIndex {
-            let frameSize = frameSizeParser.parse(
-                mp3: embeddedSubframes as NSData,
-                framePosition: currentFramePosition,
-                version: id3Tag.properties.version)
-            let frame = embeddedSubframes.subdata(with: NSMakeRange(currentFramePosition, min(frameSize, embeddedSubframes.endIndex - currentFramePosition)))
-            id3FrameParser.parse(frame: frame, frameSize: frameSize, id3Tag: id3Tag)
-            currentFramePosition += frame.count;
-        }
-    }
-
-    
-    
 }

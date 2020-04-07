@@ -12,6 +12,7 @@ import Foundation;
  */
 public class ID3TagEditor {
     private let id3TagParser: ID3TagParser
+    private let id3SubframePseudoTagParser: ID3SubframePseudoTagParser
     private let mp3FileReader: Mp3FileReader
     private let mp3FileWriter: Mp3FileWriter
     private let mp3WithID3TagBuilder: Mp3WithID3TagBuilder
@@ -21,6 +22,7 @@ public class ID3TagEditor {
      */
     public init() {
         self.id3TagParser = ID3TagParserFactory.make()
+        self.id3SubframePseudoTagParser = ID3SubframePseudoTagParserFactory.make()
         self.mp3FileReader = Mp3FileReader()
         self.mp3FileWriter = Mp3FileWriter()
         self.mp3WithID3TagBuilder = Mp3WithID3TagBuilder(
