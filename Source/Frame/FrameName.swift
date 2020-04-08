@@ -201,6 +201,20 @@ public enum FrameName: Hashable {
                     case .version3, .version4:
                         return "WXXX"
             }
+            case .Chapter:
+                switch  version {
+                    case .version2:
+                        return nil
+                    case .version3, .version4:
+                        return "CHAP"
+            }
+            case .TableOfContents:
+                switch version {
+                    case .version2:
+                        return nil
+                    case .version3, .version4:
+                        return "CTOC"
+                }
             default:
                 return nil
         }

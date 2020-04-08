@@ -48,6 +48,7 @@ extension FrameParser {
     
     internal func extractChapterElements(
         from frameData: inout Data.SubSequence,
+        version: ID3Version,
         encoding: ID3StringEncoding,
         subframePseudoTagParser: ID3SubframePseudoTagParser
     ) -> (
@@ -65,15 +66,10 @@ extension FrameParser {
             let startByteOffset = Int(frameData.extractFirst(4).uint32)
             let endByteOffset = Int(frameData.extractFirst(4).uint32)
             
-            var embeddedSubframes: [FrameName: ID3Frame]? = [:]
-            var subframePseudoTag: ID3Tag?
-            while !frameData.isEmpty {
-                do {
-                    subframePseudoTag = try subframePseudoTagParser.parse(
-                    subframeData: frameData)
-                } catch { print("unable to parse subframes", error, error.localizedDescription) }
-                embeddedSubframes = subframePseudoTag?.frames
-            }
+            let subframePseudoTag = subframePseudoTagParser.parse(
+                subframeData: frameData, version: version)
+            let embeddedSubframes = subframePseudoTag?.frames
+            
             return (elementID: elementID,
                     startTime: startTime,
                     endTime: endTime,

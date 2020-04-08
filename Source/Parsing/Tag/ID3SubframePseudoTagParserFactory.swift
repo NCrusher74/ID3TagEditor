@@ -12,8 +12,6 @@ class ID3SubframePseudoTagParserFactory {
         let id3FrameConfiguration = ID3FrameConfiguration()
         let id3TagConfiguration = ID3TagConfiguration()
         let subframePseudoTagParser = ID3SubframePseudoTagParser(
-            tagVersionParser: ID3TagVersionParser(),
-            tagPresence: ID3TagPresence(id3TagConfiguration: id3TagConfiguration),
             tagSizeParser: ID3TagSizeParser(),
             id3TagConfiguration: id3TagConfiguration,
             frameParser: ID3FramesParser(

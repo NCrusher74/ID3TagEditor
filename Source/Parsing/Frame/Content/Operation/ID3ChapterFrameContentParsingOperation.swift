@@ -22,6 +22,7 @@ struct ID3ChapterFrameContentParsingOperation: FrameContentParsingOperation, Fra
         
         let parsed = extractChapterElements(
             from: &parsing,
+            version: version,
             encoding: encoding,
             subframePseudoTagParser: subframePseudoTagParser!)
 
